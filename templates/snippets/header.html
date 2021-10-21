@@ -1,0 +1,28 @@
+<style>
+
+.container-fluid{
+    
+    padding : 5px 30px;
+    color: white;
+}
+
+
+
+</style>
+
+
+<nav class="navbar navbar-light bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="color:white;">Stealth - Carsify</a>
+    <form class="d-flex">
+        <span style='margin-right:30px; padding-top:5px'><a class="p-2 text-light" style='text-decoration:none;' href="{% url 'home:home' %}">Home</a></span>
+        {% if request.user.is_authenticated %}
+            <span style='margin-right:30px; padding-top:5px'><a class="p-2 text-light" href="{% url 'home:profile' user_id=request.user.id %}">My Profile</a></span>
+            <span style='margin-right:30px; padding-top:5px'><a class="p-2 text-light" href="{% url 'accounts:logout' %}">Logout</a></span>
+        {% else %}
+            <span style='margin-right:30px; padding-top:5px'><a class="p-2 text-light" style='text-decoration:none;' href="{% url 'accounts:login' %}">Login</a></span>
+            <a class="btn btn-outline-primary" href="{% url 'accounts:signup' %}">Sign-up</a>
+		{% endif %}	
+    </form>
+  </div>
+</nav>
