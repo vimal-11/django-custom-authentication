@@ -10,7 +10,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = Accounts
-        fields = ('email', 'username', 'password1', 'password2')
+        fields = ('email', 'username', 'first_name', 'last_name', 'password1', 'password2' )
 
     def clean_email(self):
         email = self.cleaned_data['email'].lower()

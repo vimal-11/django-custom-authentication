@@ -19,55 +19,7 @@
 		opacity: 0.3;
 		cursor: pointer;
 	}
-	.friends-icon{
-		color: #4287f5;
-		font-size: 40px;
-	}
-	.person-add-icon{
-		color: #4287f5;
-		font-size: 40px;
-	}
-	.friend-text{
-		font-weight: 500;
-		color: black;
-	}
-	.friends-btn{
-		background-color: #cccccc;
-		border-color: #cccccc;
-		color: #000;
-		font-weight: 500;
-	}
-	.friends-btn:hover {
-		background-color: #bfbfbf;
-		border-color: #bfbfbf;
-	}
-	.dropdown-toggle::after { 
-		content: none; 
-	}
-	.card{
-		border-radius: 12px;
-	}
-	.material-icons{
-		font-size: 30px;
-	}
-	.material-icons:hover{
-		cursor: pointer;
-	}
-	.confirm-friend-request{
-		color: green;
-	}
-	.confirm-friend-request:hover {
-		opacity: 0.3;
-	}
-	.decline-friend-request:hover {
-		opacity: 0.3;
-	}
-	.decline-friend-request{
-		color: red;
-	}
-	.message-btn-text{
-		font-weight: 500;
-	}
+
 </style>
 
 <div class="container-fluid" style='margin: 50px 0px'>
@@ -75,6 +27,10 @@
 
 		<div class="card profile-card m-2">
 		  <div class="card-body">
+            <div class="d-flex flex-column justify-content-center p-4">
+                <div class="image-container mx-auto mb-4">
+		  			<img class="d-block border border-dark rounded-circle img-fluid mx-auto profile-image" alt="carsifylogo" id="id_profile_image" src="{% static 'images/avatar1.png' %}">
+		  		</div>
 		  	
 		  		<p class="mt-4 mb-1 field-heading">Email</p>
 		  		<h5 style='color:black'>{{email}}</h5>
@@ -82,21 +38,27 @@
 		  		<p class="mt-4 mb-1 field-heading">Username</p>
 		  		<h5 style='color:black'>{{username}}</h5>
 
-		  		<!-- If Auth user is viewing their own profile -->
 		  		
 		  		<a  class="mt-4 btn btn-primary" style='width:255px;' href="#">Update</a>
 				<div class="d-flex flex-column mt-4">
 				    <a class="m-auto" href="#">Change password</a>
 				</div>
 		  		
-		  	
+		  	</div>
 		  </div>
 		</div>
-        <div style='margin: 50px 100px'>
-        <form class='logout-link' action='{% url 'accounts:logout' %}' method="POST">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
+        <div class="card profile-card m-2 ">
+            <div style='margin: 50px 100px'>
+            <form class='logout-link' action='{% url 'accounts:logout' %}' method="POST">
+                {% csrf_token %}
+                <button class="btn btn-outline-primary" type="submit">Logout</button>
+                
+                
+            </form>
+            <p style='color:black; margin-top: 20px;'>Deals = 13</p>
+
+            <button class="btn btn-outline-primary">Purchases</button>
+            </div>
         </div>
     </div>
 </div>

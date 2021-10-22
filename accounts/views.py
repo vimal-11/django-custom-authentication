@@ -1,3 +1,4 @@
+from accounts.models import Accounts
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
@@ -9,7 +10,6 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
 
-from accounts.models import Accounts
 from .tokens import generate_token
 
 from .forms import RegistrationForm, AccountLoginForm
@@ -29,6 +29,8 @@ def signup_view(request, *args, **kwargs):
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email').lower()
             raw_password = form.cleaned_data.get('password1')
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
             form.save()
             #account = authenticate(email=email, password=raw_password)
             #login(request, account)
@@ -37,6 +39,8 @@ def signup_view(request, *args, **kwargs):
             #	return redirect(destination)
             #return redirect('home')
             new_user = Accounts.objects.get(email=email, username=username)
+            new_user.first_name = first_name
+            new_user.last_name = last_name
             new_user.is_active = False
 
             new_user.save()
@@ -71,6 +75,7 @@ def signup_view(request, *args, **kwargs):
 
 
 
+
 def login_view(request, *args, **kwargs):
     context = {}
 
@@ -88,15 +93,18 @@ def login_view(request, *args, **kwargs):
             if user:
                 login(request, user)
                 destination = get_redirect_if_exists(request)
-                print("destination: " + str(destination))
                 if destination:
                     return redirect(destination)
                 return redirect("home:home")
+        else:
+             context['login_form'] = form
+        
     else:
         form = AccountLoginForm()
         context['login_form'] = form
 
     return render(request, "accounts/login.html", context)
+
 
 
 
@@ -114,8 +122,13 @@ def get_redirect_if_exists(request):
 			redirect = str(request.GET.get("next"))
 	return redirect
 
+
+
+
 def verify(request):
      return render(request, 'accounts/signup_verify.html')
+
+
 
 
 def activate(request, uidb64, token):

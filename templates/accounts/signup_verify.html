@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
+<div style='margin: 50px 50px;'>
       <div>
         <h3>Hello {{ name }}!</h3>
+        <br>
         <p>Your Account has been created successfully! <br>We have sent a confirmation mail to your registered email, please verify your email and login in order to activate your account.</p>
       </div>
         <button type="button" value="Gmail">Gmail
             <a href='https://mail.google.com/'></a>
         </button>
+</div>
         
 {% endblock content %}
