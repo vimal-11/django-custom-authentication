@@ -1,1 +1,6 @@
 stealth_intern/info.py
+/static/bootstrap
+db.sqlite3
+*.sqlite3
+*/__pycache__
+*.pyc

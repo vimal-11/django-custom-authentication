@@ -41,8 +41,7 @@ class Accounts(AbstractBaseUser):
     is_active				= models.BooleanField(default=True)
     is_staff				= models.BooleanField(default=False)
     is_superuser			= models.BooleanField(default=False)
-    #profile_image			= models.ImageField(max_length=255, upload_to=get_profile_image_filepath, null=True, blank=True, default=get_default_profile_image)
-    #hide_email				= models.BooleanField(default=True)
+    
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -56,6 +55,6 @@ class Accounts(AbstractBaseUser):
     def has_perm(self, perm, obj=None):
         return self.is_admin
 
-    # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
+    # Does this user have permission to view this app? (ALWAYS YES)
     def has_module_perms(self, app_label):
         return True
